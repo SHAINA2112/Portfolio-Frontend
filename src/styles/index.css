@@ -1,0 +1,145 @@
+@import "tailwindcss";
+/*THEME TOKENS
+   Dark is default; [data-theme="light"] overrides. */
+
+:root {
+  --bg-primary: #09090b;
+  --bg-secondary: #111827;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-strong: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --accent-cyan: #22d3ee;
+  --accent-secondary: #a78bfa;   /* purple in dark mode */
+  --accent-tertiary: #34d399;    /* emerald in dark mode */
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 60px rgba(34, 211, 238, 0.15);
+  --noise-opacity: 0.035;
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #eef2f7;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-strong: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --text-primary: #111827;
+  --text-secondary: #475569;
+  --accent-cyan: #06b6d4;
+  --accent-secondary: #6366f1;   /* indigo in light mode */
+  --accent-tertiary: #8b5cf6;    /* purple in light mode */
+  --shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 60px rgba(6, 182, 212, 0.12);
+  color-scheme: light;
+}
+/*TAILWIND THEME MAPPING*/
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-accent: "Outfit", sans-serif;
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-glass: var(--glass-bg);
+  --color-glass-strong: var(--glass-bg-strong);
+  --color-border-glass: var(--glass-border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-cyan: var(--accent-cyan);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-tertiary: var(--accent-tertiary);
+}
+/* BASE */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: auto; /* Lenis handles smoothing */
+}
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+::selection {
+  background: var(--accent-cyan);
+  color: #09090b;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+/* Keyboard focus visibility (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/*REUSABLE GLASS PRIMITIVE*/
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+.gradient-border {
+  position: relative;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+    linear-gradient(135deg, var(--accent-cyan), var(--accent-secondary), var(--accent-tertiary)) border-box;
+}
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Cursor glow layer target (positioned via JS in CursorGlow component) */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: radial-gradient(
+    500px circle at var(--x, 50%) var(--y, 50%),
+    color-mix(in srgb, var(--accent-cyan) 8%, transparent),
+    transparent 70%
+  );
+  transition: opacity 0.3s ease;
+}
