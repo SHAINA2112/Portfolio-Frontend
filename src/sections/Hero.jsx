@@ -334,7 +334,6 @@ export default function Hero() {
             shadow-2xl
             shadow-cyan-300/20
             backdrop-blur-xl
-            lg:w -[320px]
             dark:border-white/10
             dark:bg-transparent
             dark:shadow-[0_0_40px_rgba(6,182,212,.15)]

@@ -11,14 +11,14 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const activeId = useScrollSpy(navLinks.map((l) => l.to));
   return (
-    <header className="fixed inset-x-0 max-w-full top-0 pt-3 z-50 w-full px-auto">
-      <Container className="w-full">
-        <motion.nav
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="glass flex items-center justify-between rounded-2xl px-5 py-3 sm:px-6 w-full"
-        >
+    <header className="fixed top-0 left-0 right-0 z-50 pt-3 px-4 sm:px-6">
+  <Container className="w-full">
+    <motion.nav
+      initial={{ y: -30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="glass flex w-full items-center justify-between rounded-2xl px-5 py-3 sm:px-6"
+    >
           <Link
             to="hero"
             smooth

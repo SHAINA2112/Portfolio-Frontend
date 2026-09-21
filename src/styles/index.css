@@ -56,6 +56,8 @@
 }
 html {
   scroll-behavior: auto; /* Lenis handles smoothing */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 body {
   background-color: var(--bg-primary);
@@ -63,6 +65,7 @@ body {
   font-family: var(--font-body);
   transition: background-color 0.5s ease, color 0.5s ease;
   overflow-x: hidden;
+  max-width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, h4, h5, h6 {
